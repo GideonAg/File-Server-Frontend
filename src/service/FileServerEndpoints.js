@@ -1,0 +1,101 @@
+import axios from "axios";
+
+// const FILE_SERVER_BASE_API = "https://file-server-backend-1n25.onrender.com";
+const FILE_SERVER_BASE_API = "http://localhost:8080";
+
+class FileServerEndpoints {
+  signup(user) {
+    return axios.post(FILE_SERVER_BASE_API + "/auth/register", user);
+  }
+
+  login(user) {
+    return axios.post(FILE_SERVER_BASE_API + "/auth/login", user);
+  }
+
+  forgotPassword(user) {
+    return axios.post(FILE_SERVER_BASE_API + "/auth/forgot-password", user);
+  }
+
+  updatePassword(token, user) {
+    return axios.post(
+      FILE_SERVER_BASE_API + "/auth/update-password?token=" + token,
+      user
+    );
+  }
+
+  shareFile(fileShareBody, user) {
+    return axios.post(FILE_SERVER_BASE_API + "/file/share", fileShareBody, {
+      headers: {
+        Authorization: `Bearer ${user.jwt}`,
+      },
+    });
+  }
+
+  downloadFile(fileId, user) {
+    return axios({
+      url: FILE_SERVER_BASE_API + "/file/download/" + fileId,
+      method: "GET",
+      responseType: "blob",
+      headers: {
+        Authorization: `Bearer ${user.jwt}`,
+      },
+    });
+  }
+
+  uploadFile(fileBody, user) {
+    return axios.post(FILE_SERVER_BASE_API + `/file/upload`, fileBody, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${user.jwt}`,
+      },
+    });
+  }
+
+  adminGetAllFiles(user) {
+    return axios.get(FILE_SERVER_BASE_API + "/file/admin/all-files", {
+      headers: {
+        Authorization: `Bearer ${user.jwt}`,
+      },
+    });
+  }
+
+  userGetAllFiles(user) {
+    return axios.get(FILE_SERVER_BASE_API + "/file/user/all-files", {
+      headers: {
+        Authorization: `Bearer ${user.jwt}`,
+      },
+    });
+  }
+
+  deleteFileById(fileId, user) {
+    return axios.delete(FILE_SERVER_BASE_API + "/file/delete/" + fileId, {
+      headers: {
+        Authorization: `Bearer ${user.jwt}`,
+      },
+    });
+  }
+
+  adminSearchForFile(fileName, user) {
+    return axios.get(
+      FILE_SERVER_BASE_API + "/file/admin/search-for-file/" + fileName,
+      {
+        headers: {
+          Authorization: `Bearer ${user.jwt}`,
+        },
+      }
+    );
+  }
+
+  userSearchForFile(fileName, user) {
+    return axios.get(
+      FILE_SERVER_BASE_API + "/file/user/search-for-file/" + fileName,
+      {
+        headers: {
+          Authorization: `Bearer ${user.jwt}`,
+        },
+      }
+    );
+  }
+}
+
+export default new FileServerEndpoints();
