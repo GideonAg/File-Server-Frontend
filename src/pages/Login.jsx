@@ -8,7 +8,7 @@ const Login = ({ dispatchUser }) => {
     email: "",
     password: "",
   });
-  const [message, setMessage] = useState(null);
+  const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -22,10 +22,14 @@ const Login = ({ dispatchUser }) => {
         }
       })
       .catch((error) => {
-        setMessage(error.response.data);
-        setTimeout(() => {
-          setMessage("");
-        }, 5000);
+        console.log(error);
+        let message = error.response.data.email
+          ? error.response.data.email
+          : error.response.data.password
+          ? error.response.data.password
+          : error.response.data;
+        setMessage(message);
+        setTimeout(() => setMessage(""), 5000);
       });
   };
 

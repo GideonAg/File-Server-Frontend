@@ -7,6 +7,8 @@ const ForgotPassword = () => {
     email: "",
   });
 
+  const [message, setMessage] = useState("");
+
   const passwordChange = (e) => {
     e.preventDefault();
     FileServerEndpoints.forgotPassword(user)
@@ -14,8 +16,11 @@ const ForgotPassword = () => {
         alert(response.data);
       })
       .catch((error) => {
-        console.log(error);
-        alert(error.response.data);
+        let message = error.response.data.email
+          ? error.response.data.email
+          : error.response.data;
+        setMessage(message);
+        setTimeout(() => setMessage(""), 5000);
       });
   };
 
@@ -28,6 +33,7 @@ const ForgotPassword = () => {
     <div className="p-11">
       <form className="mx-auto flex border-b shadow max-w-2xl">
         <div className="p-11">
+          <div className="text-xl text-red-500">{message ? message : ""}</div>
           <div>
             <label className="font-semibold text-xl">Enter your email:</label>
             <Input

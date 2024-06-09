@@ -8,13 +8,23 @@ const SignUp = () => {
     password: "",
   });
 
+  const [message, setMessage] = useState("");
+
   const signUpUser = (e) => {
     e.preventDefault();
     FileServerEndpoints.signup(user)
       .then((response) => {
         alert(response.data);
       })
-      .catch((error) => alert(error.response.data));
+      .catch((error) => {
+        let message = error.response.data.email
+          ? error.response.data.email
+          : error.response.data.password
+          ? error.response.data.password
+          : error.response.data;
+        setMessage(message);
+        setTimeout(() => setMessage(""), 5000);
+      });
   };
 
   const handleChange = (e) => {
@@ -29,6 +39,7 @@ const SignUp = () => {
           <div className="text-2xl flex justify-center trackling-wider font-bold">
             <h1>File Server Sign Up</h1>
           </div>
+          <div className="text-xl text-red-500">{message ? message : ""}</div>
           <div className="items-center justify-center h-14 w-full my-4">
             <label className="font-semibold text-xl">Email:</label>
             <Input

@@ -11,16 +11,20 @@ const ShareFile = ({ user }) => {
     receiverEmail: "",
   });
 
+  const [message, setMessage] = useState("");
+
   const sendFile = (e) => {
     e.preventDefault();
-    FileServerEndpoints.shareFile(fileBody)
+    FileServerEndpoints.shareFile(fileBody, user)
       .then((response) => {
-        console.log(response);
         alert(response.data);
       })
       .catch((error) => {
-        console.log(error);
-        alert(error.response.data);
+        let message = error.response.data.receiverEmail
+          ? error.response.data.receiverEmail
+          : error.response.data;
+        setMessage(message);
+        setTimeout(() => setMessage(""), 5000);
       });
   };
 
@@ -29,12 +33,11 @@ const ShareFile = ({ user }) => {
     setFileBody({ ...fileBody, [e.target.name]: value });
   };
 
-  console.log(user);
-
   return (
     <div className="p-11">
       <form className="mx-auto flex flex-col md:flex-row border-b shadow max-w-2xl">
         <div className="p-11">
+          <div className="text-xl text-red-500">{message ? message : ""}</div>
           <div>
             <label className="font-semibold text-xl">
               Enter receiver email:
