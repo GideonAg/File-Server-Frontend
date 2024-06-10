@@ -3,6 +3,7 @@ import FileServerEndpoints from "../service/FileServerEndpoints";
 import {
   ActionIcon,
   Box,
+  Button,
   Container,
   Group,
   Paper,
@@ -13,7 +14,7 @@ import {
   rem,
 } from "@mantine/core";
 import { IconArrowRight, IconSearch, IconShare3 } from "@tabler/icons-react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const FeedUser = ({ user }) => {
   const navigate = useNavigate();
@@ -45,6 +46,16 @@ const FeedUser = ({ user }) => {
       alert(error.message);
       setIsLoading(false);
     }
+  };
+
+  const logout = async (e) => {
+    e.preventDefault();
+
+    FileServerEndpoints.logout(user)
+      .then((response) => console.log(response))
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   useEffect(() => {
@@ -133,6 +144,12 @@ const FeedUser = ({ user }) => {
                     </ActionIcon>
                   }
                 />
+              </Box>
+              <Link to={"/change-password"}>
+                <Button>Change Password</Button>
+              </Link>
+              <Box>
+                <Button onClick={logout}>Loguot</Button>
               </Box>
             </Paper>
           </Container>

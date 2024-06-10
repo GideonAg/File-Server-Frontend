@@ -23,6 +23,18 @@ class FileServerEndpoints {
     );
   }
 
+  changePassword(userPassword, user) {
+    return axios.post(
+      FILE_SERVER_BASE_API + "/auth/change-password",
+      userPassword,
+      {
+        headers: {
+          Authorization: `Bearer ${user.jwt}`,
+        },
+      }
+    );
+  }
+
   shareFile(fileShareBody, user) {
     return axios.post(FILE_SERVER_BASE_API + "/file/share", fileShareBody, {
       headers: {

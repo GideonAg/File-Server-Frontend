@@ -34,6 +34,7 @@ const FeedAdmin = ({ user }) => {
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState("");
   const [fileName, setFileName] = useState("");
+
   const deleteFile = async (fileId) => {
     try {
       setIsLoading(true);
@@ -77,6 +78,16 @@ const FeedAdmin = ({ user }) => {
       alert(error.message);
       setIsLoading(false);
     }
+  };
+
+  const logout = async (e) => {
+    e.preventDefault();
+
+    FileServerEndpoints.logout(user)
+      .then((response) => console.log(response))
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   useEffect(() => {
@@ -216,6 +227,12 @@ const FeedAdmin = ({ user }) => {
                     </ActionIcon>
                   }
                 />
+              </Box>
+              <Link to={"/change-password"}>
+                <Button>Change Password</Button>
+              </Link>
+              <Box>
+                <Button onClick={logout}>Loguot</Button>
               </Box>
             </Paper>
           </Container>

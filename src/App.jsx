@@ -13,7 +13,8 @@ import FileUpload from "./pages/FileUpload";
 import ShareFile from "./pages/ShareFile";
 import FeedUser from "./pages/FeedUser";
 import { HomePage } from "./pages/HomePage";
-import { useEffect, useReducer } from "react";
+import { useReducer } from "react";
+import ChangePassword from "./pages/ChangePassword";
 
 const updateUser = (state, action) => {
   switch (action.type) {
@@ -62,6 +63,10 @@ function App() {
             element={<Login dispatchUser={dispatchUser} />}
           />
           <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route
+            path="/change-password"
+            element={<ChangePassword user={user} />}
+          />
           <Route path="/update-password/:token" element={<UpdatePassword />} />
           <Route path="/upload-file" element={<FileUpload user={user} />} />
           <Route
