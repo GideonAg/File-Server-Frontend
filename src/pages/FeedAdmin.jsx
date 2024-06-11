@@ -23,7 +23,7 @@ import {
 } from "@tabler/icons-react";
 import { Link, useNavigate } from "react-router-dom";
 
-const FeedAdmin = ({ user }) => {
+const FeedAdmin = ({ user, dispatchUser }) => {
   const navigate = useNavigate();
   const [noTransitionOpened, setNoTransitionOpened] = useState(false);
 
@@ -82,11 +82,14 @@ const FeedAdmin = ({ user }) => {
 
   const logout = async (e) => {
     e.preventDefault();
-
     FileServerEndpoints.logout(user)
-      .then((response) => console.log(response))
+      .then((response) => {
+        dispatchUser({ type: "clear-session", payload: response.data });
+        alert(response.data);
+        navigate("/login");
+      })
       .catch((error) => {
-        console.log(error);
+        alert(error.response.data);
       });
   };
 

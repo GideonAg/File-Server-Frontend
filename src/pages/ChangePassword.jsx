@@ -15,6 +15,7 @@ const ChangePassword = ({ user }) => {
 
     FileServerEndpoints.changePassword(userPassword, user)
       .then((response) => {
+        console.log(response);
         alert(response.data);
       })
       .catch((error) => {

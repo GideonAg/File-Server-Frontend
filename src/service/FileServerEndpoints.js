@@ -108,6 +108,19 @@ class FileServerEndpoints {
       }
     );
   }
+
+  logout(user) {
+    return axios.post(
+      FILE_SERVER_BASE_API + "/logout",
+      {},
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.jwt}`,
+        },
+      }
+    );
+  }
 }
 
 export default new FileServerEndpoints();

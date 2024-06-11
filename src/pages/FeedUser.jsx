@@ -16,7 +16,7 @@ import {
 import { IconArrowRight, IconSearch, IconShare3 } from "@tabler/icons-react";
 import { Link, useNavigate } from "react-router-dom";
 
-const FeedUser = ({ user }) => {
+const FeedUser = ({ user, dispatchUser }) => {
   const navigate = useNavigate();
 
   const [files, setFiles] = useState([]);
@@ -50,11 +50,14 @@ const FeedUser = ({ user }) => {
 
   const logout = async (e) => {
     e.preventDefault();
-
     FileServerEndpoints.logout(user)
-      .then((response) => console.log(response))
+      .then((response) => {
+        dispatchUser({ type: "clear-session", payload: response.data });
+        alert(response.data);
+        navigate("/login");
+      })
       .catch((error) => {
-        console.log(error);
+        alert(error.response.data);
       });
   };
 

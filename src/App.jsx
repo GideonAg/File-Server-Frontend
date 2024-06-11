@@ -30,7 +30,7 @@ const updateUser = (state, action) => {
       return {
         userId: "",
         userEmail: "",
-        jwt: "",
+        jwt: "null",
         isAdmin: null,
       };
     }
@@ -55,8 +55,14 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/admin" element={<FeedAdmin user={user} />} />
-          <Route path="/user" element={<FeedUser user={user} />} />
+          <Route
+            path="/admin"
+            element={<FeedAdmin user={user} dispatchUser={dispatchUser} />}
+          />
+          <Route
+            path="/user"
+            element={<FeedUser user={user} dispatchUser={dispatchUser} />}
+          />
           <Route path="/sign-up" element={<SignUp />} />
           <Route
             path="/login"
