@@ -1,7 +1,6 @@
 import axios from "axios";
 
-// const FILE_SERVER_BASE_API = "https://file-server-backend-1n25.onrender.com";
-const FILE_SERVER_BASE_API = "http://localhost:8080";
+const FILE_SERVER_BASE_API = "https://file-server-backend-1n25.onrender.com";
 
 class FileServerEndpoints {
   signup(user) {
