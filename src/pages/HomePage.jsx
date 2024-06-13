@@ -2,6 +2,7 @@ import { Box, Button, Container, Grid, Image, Text } from "@mantine/core";
 import { IconArrowRight } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import { responsivenes } from "../utils/responsivenes";
+import homeImage from "../../public/images/notion-parade.webp";
 
 export const HomePage = () => {
   const { smallTextSize, textSize } = responsivenes();
@@ -20,7 +21,7 @@ export const HomePage = () => {
               Welcome
             </Text>
             <Text size={smallTextSize} fw={300}>
-              to the Files Server
+              to the File Server
             </Text>
             <Link to={"/login"}>
               <Button
@@ -33,7 +34,7 @@ export const HomePage = () => {
             </Link>
           </Grid.Col>
           <Grid.Col>
-            <Image src={"../../public/images/notion-parade.webp"} />
+            <Image src={homeImage} />
           </Grid.Col>
         </Grid>
       </Box>

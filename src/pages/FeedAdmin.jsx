@@ -118,9 +118,10 @@ const FeedAdmin = ({ user, dispatchUser }) => {
         <Table.Td>{row.description}</Table.Td>
         <Table.Td>
           <a
-            href={`https://file-server-backend-1n25.onrender.com/file/download/${row?.id}`}
+            // href={`https://file-server-backend-1n25.onrender.com/file/download/${row?.id}`}
             className="hover:cursor-pointer uppercase text-blue-600"
             download={true}
+            onClick={downloadFile}
           >
             Download
           </a>

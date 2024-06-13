@@ -26,7 +26,6 @@ const FileUpload = ({ user }) => {
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  // handle responsiveness
   const { midText } = responsivenes();
 
   const handleChange = (e) => {
@@ -55,7 +54,6 @@ const FileUpload = ({ user }) => {
       });
     } catch (error) {
       const { data } = error?.response || {};
-      console.log(error);
       setIsLoading(false);
       notifications?.show({
         title: "Oh No!!!",

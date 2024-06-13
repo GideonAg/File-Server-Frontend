@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const FILE_SERVER_BASE_API = "https://file-server-backend-1n25.onrender.com";
+// const FILE_SERVER_BASE_API = "https://file-server-backend-1n25.onrender.com";
+const FILE_SERVER_BASE_API = "http://localhost:8080";
 
 class FileServerEndpoints {
   signup(user) {
@@ -43,8 +44,7 @@ class FileServerEndpoints {
   }
 
   downloadFile(fileId, user) {
-    return axios({
-      url: FILE_SERVER_BASE_API + "/file/download/" + fileId,
+    return axios(FILE_SERVER_BASE_API + "/file/download/" + fileId, {
       method: "GET",
       responseType: "blob",
       headers: {
