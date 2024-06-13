@@ -1,6 +1,6 @@
 import { useState } from "react";
 import FileServerEndpoints from "../service/FileServerEndpoints";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button, Input } from "@mantine/core";
 
 const UpdatePassword = () => {
@@ -10,12 +10,14 @@ const UpdatePassword = () => {
   });
 
   const [passwordType, setPasswordType] = useState("password");
+  const navigate = useNavigate();
 
   const passwordChange = (e) => {
     e.preventDefault();
     FileServerEndpoints.updatePassword(token, user)
       .then((response) => {
         alert(response.data);
+        navigate("/login");
       })
       .catch((error) => {
         let message = error.response.data.password
