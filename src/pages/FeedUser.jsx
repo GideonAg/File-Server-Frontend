@@ -61,6 +61,26 @@ const FeedUser = ({ user, dispatchUser }) => {
       });
   };
 
+  const downloadFile = (e, fileId, user) => {
+    e.preventDefault();
+
+    FileServerEndpoints.downloadFile(fileId, user).then((response) => {
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+
+      const contentDisposition = response.headers["content-disposition"];
+      const filename = contentDisposition
+        ? contentDisposition.match(/filename="?([^"]+)"?/)[1]
+        : "downloaded_file";
+
+      link.setAttribute("download", filename);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+  };
+
   useEffect(() => {
     (async () => {
       setIsLoading(true);
@@ -85,10 +105,10 @@ const FeedUser = ({ user, dispatchUser }) => {
         <Table.Td>{row.title}</Table.Td>
         <Table.Td>{row.description}</Table.Td>
         <Table.Td>
-          <a
-            href={`https://file-server-backend-1n25.onrender.com/file/download/${row?.id}`}
+        <a
+            href="#"
             className="hover:cursor-pointer uppercase text-blue-600"
-            download={true}
+            onClick={(e) => downloadFile(e, row.id, user)}
           >
             Download
           </a>
