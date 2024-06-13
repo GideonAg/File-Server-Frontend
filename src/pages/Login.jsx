@@ -22,7 +22,6 @@ const Login = ({ dispatchUser }) => {
         }
       })
       .catch((error) => {
-        console.log(error);
         let message = error.response.data.email
           ? error.response.data.email
           : error.response.data.password
