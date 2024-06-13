@@ -148,14 +148,12 @@ const FeedUser = ({ user, dispatchUser }) => {
                   }
                 />
               </Box>
-              <div>
-                <Link to={"/change-password"}>
-                  <Button>Change Password</Button>
-                </Link>
-                <Box>
-                  <Button onClick={logout}>Logout</Button>
-                </Box>
-              </div>
+              <Link to={"/change-password"}>
+                <Button>Change Password</Button>
+              </Link>
+              <Box>
+                <Button onClick={logout}>Logout</Button>
+              </Box>
             </Paper>
           </Container>
           <div className="shadow border-b-4">

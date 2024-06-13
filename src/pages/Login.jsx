@@ -41,6 +41,10 @@ const Login = ({ dispatchUser }) => {
     <div className="p-11">
       <form className="flex max-w-lg mx-auto shadow border-b">
         <div className="px-8 py-8">
+          <div>
+            May take a little while to process requests, backend hosted on a
+            free service plan😊
+          </div>
           <div className="text-2xl flex justify-center trackling-wider font-bold">
             <h1>Login to File Server</h1>
           </div>
