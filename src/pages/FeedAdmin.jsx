@@ -255,7 +255,7 @@ const FeedAdmin = ({ user, dispatchUser }) => {
                 <Button>Change Password</Button>
               </Link>
               <Box>
-                <Button onClick={logout}>Loguot</Button>
+                <Button onClick={logout}>Logout</Button>
               </Box>
             </Paper>
           </Container>
