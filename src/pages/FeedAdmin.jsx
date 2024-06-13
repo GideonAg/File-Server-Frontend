@@ -251,12 +251,14 @@ const FeedAdmin = ({ user, dispatchUser }) => {
                   }
                 />
               </Box>
-              <Link to={"/change-password"}>
-                <Button>Change Password</Button>
-              </Link>
-              <Box>
-                <Button onClick={logout}>Logout</Button>
-              </Box>
+              <div>
+                <Link to={"/change-password"}>
+                  <Button>Change Password</Button>
+                </Link>
+                <Box>
+                  <Button onClick={logout}>Logout</Button>
+                </Box>
+              </div>
             </Paper>
           </Container>
           <div className="shadow border-b-4">
