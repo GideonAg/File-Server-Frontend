@@ -16,7 +16,10 @@ const UpdatePassword = () => {
         alert(response.data);
       })
       .catch((error) => {
-        alert(error.response.data);
+        let message = error.response.data.password
+          ? error.response.data.password
+          : error.response.data;
+        alert(message);
       });
   };
 
