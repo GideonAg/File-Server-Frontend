@@ -44,8 +44,7 @@ class FileServerEndpoints {
   }
 
   downloadFile(fileId, user) {
-    return axios(FILE_SERVER_BASE_API + "/file/download/" + fileId, {
-      method: "GET",
+    return axios.get(FILE_SERVER_BASE_API + "/file/download/" + fileId, {
       responseType: "blob",
       headers: {
         Authorization: `Bearer ${user.jwt}`,
